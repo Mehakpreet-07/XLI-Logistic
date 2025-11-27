@@ -1,0 +1,758 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>XLI Logistic Ltd. | Premier Freight Solutions</title>
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <style>
+        /* =========================================
+           1. CORE VARIABLES & RESET
+           ========================================= */
+        :root {
+            --primary: #2563eb;
+            --primary-dark: #1e40af;
+            --accent: #38bdf8;
+            --dark-bg: #0f172a;
+            --light-bg: #f8fafc;
+            --text-main: #1e293b;
+            --text-light: #64748b;
+            --white: #ffffff;
+            --gold: #fbbf24;
+            --container: 1280px;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            color: var(--text-main);
+            background: var(--white);
+            line-height: 1.6;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
+        
+        img { max-width: 100%; height: auto; display: block; }
+        ul { list-style: none; padding: 0; }
+        a { text-decoration: none; color: inherit; transition: 0.3s; }
+
+        /* =========================================
+           2. UTILITY CLASSES
+           ========================================= */
+        .container {
+            max-width: var(--container);
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        .section-padding { padding: clamp(60px, 8vw, 100px) 0; }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 14px 32px;
+            border-radius: 50px;
+            font-weight: 600;
+            white-space: nowrap;
+            cursor: pointer;
+            border: none;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: white;
+            box-shadow: 0 4px 15px rgba(37, 99, 235, 0.3);
+        }
+        .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 25px rgba(37, 99, 235, 0.4); }
+
+        .btn-outline-white {
+            border: 2px solid rgba(255,255,255,0.3);
+            color: white;
+            background: transparent;
+        }
+        .btn-outline-white:hover { border-color: white; background: white; color: var(--dark-bg); }
+
+        .btn-glow {
+            background: transparent; border: 2px solid var(--accent); color: var(--accent);
+            position: relative; overflow: hidden;
+        }
+        .btn-glow:hover { background: var(--accent); color: var(--dark-bg); box-shadow: 0 0 20px rgba(56, 189, 248, 0.6); }
+
+        h1, h2, h3 { line-height: 1.2; }
+
+        /* =========================================
+           3. HEADER & MOBILE NAV
+           ========================================= */
+        .top-bar {
+            background-color: var(--dark-bg);
+            color: #cbd5e1;
+            font-size: 13px;
+            padding: 8px 0;
+        }
+        .top-bar-content { display: flex; justify-content: flex-end; gap: 24px; }
+        /* Make links in top bar clickable but look like text */
+        .top-bar a { color: #cbd5e1; display: flex; align-items: center; gap: 6px; }
+        .top-bar a:hover { color: var(--accent); }
+        .top-bar i { color: var(--accent); }
+        
+        header {
+            position: sticky; top: 0; z-index: 1000;
+            background: #ffffff; box-shadow: 0 4px 20px rgba(0,0,0,0.05); padding: 15px 0;
+        }
+
+        .nav-wrapper { display: flex; align-items: center; justify-content: space-between; }
+
+        .brand {
+            display: flex; align-items: center;
+            font-size: 24px; font-weight: 700; color: var(--dark-bg);
+            z-index: 1005; transition: color 0.3s;
+        }
+        .brand span { color: var(--primary); }
+        .brand i { margin-right: 10px; font-size: 26px; color: var(--primary); }
+
+        .nav-center {
+            display: flex; gap: 40px;
+            margin-left: auto; margin-right: 40px; 
+        }
+        .nav-center a {
+            font-weight: 500; font-size: 15px; color: var(--text-main); position: relative;
+        }
+        /* 1. Set the links to relative so the line sticks to them */
+.nav-center a {
+    position: relative;
+    text-decoration: none;
+    color: var(--text-main);
+    font-weight: 500;
+    font-size: 15px;
+    transition: color 0.3s;
+}
+
+/* 2. Create the Blue Line (Hidden by default) */
+.nav-center a::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;       /* Spacing below the text */
+    left: 0;
+    width: 0%;          /* Start invisible */
+    height: 3px;        /* Thickness of the line */
+    background-color: var(--primary); 
+    transition: width 0.3s ease; /* The smooth animation */
+}
+
+/* 3. The Hover Effect: Change text color & Grow the line */
+.nav-center a:hover {
+    color: var(--primary);
+}
+
+.nav-center a:hover::after {
+    width: 100%; /* Expands to full width */
+}
+        .nav-center a:not(.mobile-only):hover { color: var(--primary); }
+        
+        .mobile-only { display: none; }
+
+        .hamburger {
+            display: none; cursor: pointer; z-index: 1005;
+            font-size: 24px; color: var(--dark-bg); padding: 5px;
+        }
+        
+        .close-menu {
+            display: none; position: absolute; top: 30px; right: 30px;
+            font-size: 30px; color: white; cursor: pointer;
+        }
+
+        /* =========================================
+           4. HERO SECTION
+           ========================================= */
+        .hero {
+            position: relative; min-height: 85vh; display: flex; align-items: center;
+            background: linear-gradient(90deg, #0f172a 0%, #15213c 45%, #b6d1f4 100%);
+            background-size: cover; background-position: right center; color: white; overflow: hidden;
+        }
+
+        .hero-container {
+            display: flex; align-items: center; justify-content: space-between;
+            width: 100%; max-width: var(--container); margin: 0 auto; padding: 0 24px; position: relative;
+        }
+
+        .hero-text { max-width: 650px; position: relative; z-index: 2; }
+
+        .hero-badge {
+            display: inline-flex; align-items: center;
+            background: rgba(37, 99, 235, 0.2); border: 1px solid rgba(56, 189, 248, 0.3);
+            color: var(--accent); padding: 8px 16px; border-radius: 30px;
+            font-size: 14px; font-weight: 600; margin-bottom: 24px; backdrop-filter: blur(5px);
+        }
+
+        .hero h1 {
+            font-size: clamp(2.5rem, 5vw, 4.5rem);
+            font-weight: 800; line-height: 1.1; margin-bottom: 24px;
+            background: linear-gradient(to right, #ffffff, #e2e8f0);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+        }
+
+        .hero p { font-size: clamp(1rem, 2vw, 1.2rem); color: #94a3b8; margin-bottom: 40px; max-width: 550px; }
+
+        .floating-card {
+            position: absolute; right: 0; bottom: -50px;
+            background: rgba(255, 255, 255, 0.1); backdrop-filter: blur(15px);
+            padding: 24px; border-radius: 16px; border: 1px solid rgba(255,255,255,0.2);
+            display: flex; align-items: center; gap: 20px;
+            animation: float 4s ease-in-out infinite;
+        }
+        @keyframes float { 0% { transform: translateY(0px); } 50% { transform: translateY(-20px); } 100% { transform: translateY(0px); } }
+
+        /* =========================================
+           5. TRACKING
+           ========================================= */
+        .tracking-section { background: linear-gradient(135deg, #0f172a 0%, #1e40af 100%); padding: 80px 0; position: relative; overflow: hidden; }
+        .tracking-bg { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-image: url('https://upload.wikimedia.org/wikipedia/commons/thumb/e/ec/World_map_blank_without_borders.svg/2000px-World_map_blank_without_borders.svg.png'); background-size: cover; background-position: center; opacity: 0.15; }
+        .tracking-container { position: relative; z-index: 2; display: flex; flex-direction: column; align-items: center; text-align: center; color: white; }
+        .tracking-container h2 { font-size: clamp(1.8rem, 4vw, 2.5rem); margin-bottom: 10px; font-weight: 700; }
+        
+        .track-input-group {
+            background: rgba(255, 255, 255, 0.15); backdrop-filter: blur(10px);
+            padding: 8px; border-radius: 50px; display: flex; width: 100%; max-width: 650px;
+            border: 1px solid rgba(255,255,255,0.2); box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+        }
+        .track-input-group input { background: transparent; border: none; padding: 15px 25px; flex-grow: 1; font-size: 16px; color: white; outline: none; min-width: 0; }
+        .track-input-group input::placeholder { color: rgba(255,255,255,0.7); }
+        .track-input-group button { background: var(--accent); color: var(--dark-bg); border: none; padding: 12px 35px; border-radius: 40px; font-weight: 700; cursor: pointer; transition: 0.3s; white-space: nowrap;}
+
+        .tracking-result { display: none; margin-top: 30px; background: white; color: var(--text-main); border-radius: 16px; width: 100%; max-width: 600px; overflow: hidden; box-shadow: 0 20px 40px rgba(0,0,0,0.3); text-align: left; }
+        .track-header { background: #f1f5f9; padding: 15px 25px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #e2e8f0; }
+        .track-body { padding: 25px; display: flex; gap: 20px; }
+        .track-map-mock { width: 100px; height: 100px; background-color: #e2e8f0; border-radius: 12px; background-image: url('https://image.maps.ls.hereapi.com/mia/1.6/mapview?apiKey=YOUR_API_KEY&c=49.1913,-122.8490&z=12&w=300&h=300&f=0'); background-size: cover; position: relative; flex-shrink: 0; }
+        .track-details h4 { font-size: 18px; font-weight: 700; margin-bottom: 5px; }
+        .track-meta { display: flex; gap: 15px; font-size: 13px; font-weight: 600; color: var(--dark-bg); flex-wrap: wrap; }
+
+        /* =========================================
+           6. SERVICES & MODERN FLEET (EXACT MATCH FIX)
+           ========================================= */
+        .services-header { text-align: center; margin-bottom: 60px; }
+        .services-header h2 { font-size: clamp(2rem, 4vw, 2.5rem); margin-bottom: 16px; color: var(--dark-bg); }
+        .grid-3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 30px; }
+        
+        .card { background: white; padding: 30px; border-radius: 20px; transition: all 0.4s; border: 1px solid #f1f5f9; position: relative; overflow: hidden; }
+        .card:hover { transform: translateY(-5px); box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1); border-color: transparent; }
+        .card::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 4px; background: var(--primary); transform: scaleX(0); transition: transform 0.4s; transform-origin: left; }
+        .card:hover::before { transform: scaleX(1); }
+        .icon-box { width: 60px; height: 60px; background: #eff6ff; border-radius: 16px; display: flex; align-items: center; justify-content: center; font-size: 24px; color: var(--primary); margin-bottom: 20px; transition: 0.3s; }
+        .card:hover .icon-box { background: var(--primary); color: white; }
+        
+        /* FLEET SECTION STYLING (EXACT IMAGE 2 REPLICA) */
+        .modern-fleet { background-color: var(--dark-bg); color: white; position: relative; overflow: hidden; }
+        .fleet-wrapper { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; position: relative; z-index: 2; }
+        .fleet-info h4 { color: #ffffff; opacity: 0.9; text-transform: capitalize; font-weight: 600; font-size: 16px; margin-bottom: 10px; }
+        .fleet-info h2 { font-size: clamp(3rem, 5vw, 4rem); margin-bottom: 24px; line-height: 1.1; font-weight: 800; }
+        /* The spacing fix */
+        .fleet-info p { color: #94a3b8; font-size: 1.1rem; margin-bottom: 60px; max-width: 500px; line-height: 1.7; }
+        
+        /* The Divider Line and Layout from Image 2 */
+        .stats-row { 
+            display: flex; 
+            gap: 60px; /* Wide spacing */
+            margin-bottom: 50px; 
+            border-top: 1px solid rgba(255,255,255,0.15); /* The Line */
+            padding-top: 40px; 
+        }
+        .stat h3 { font-size: 2.5rem; color: white; font-weight: 800; margin-bottom: 5px; }
+        .stat p { margin: 0; font-size: 0.9rem; color: var(--accent); text-transform: capitalize; letter-spacing: 0.5px; }
+        
+        .fleet-img { width: 100%; border-radius: 24px; box-shadow: -20px 20px 0px rgba(56, 189, 248, 0.1); border: 1px solid rgba(255,255,255,0.1); }
+
+        /* =========================================
+           7. REVIEWS (UPGRADED) & CONTACT
+           ========================================= */
+        .reviews-section { background: #f8fafc; text-align: center; } /* Off-white background */
+        
+        .review-card { 
+            background: white; padding: 40px; border-radius: 16px; 
+            border: 1px solid #f1f5f9; text-align: left; transition: 0.3s; 
+            position: relative;
+            /* Add top border accent for style */
+            border-top: 4px solid var(--primary);
+        }
+        .review-card:hover { transform: translateY(-5px); box-shadow: 0 15px 35px rgba(0,0,0,0.08); }
+        
+        .reviewer-info { display: flex; align-items: center; margin-bottom: 20px; }
+        .reviewer-img { width: 50px; height: 50px; background: #e2e8f0; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; color: var(--text-light); margin-right: 15px; }
+        .reviewer-details h4 { font-size: 16px; font-weight: 700; margin-bottom: 2px; }
+        .reviewer-details span { font-size: 13px; color: var(--primary); font-weight: 500; display:flex; align-items:center; gap:5px; }
+        
+        .stars { color: var(--gold); font-size: 14px; margin-bottom: 15px; }
+        .review-text { font-size: 16px; color: var(--text-main); font-style: italic; line-height: 1.7; }
+        
+        /* Centered Google Button */
+        .google-btn { 
+            display: inline-flex; align-items: center; justify-content: center;
+            margin: 50px auto 0 auto; /* Center Horizontal */
+            background: white; border: 1px solid #e2e8f0; 
+            padding: 14px 35px; border-radius: 50px; 
+            font-weight: 600; color: var(--text-main); transition: 0.3s; 
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+        }
+        .google-btn:hover { background: #fff; border-color: var(--primary); color: var(--primary); transform: translateY(-2px); box-shadow: 0 10px 15px rgba(0,0,0,0.05); }
+
+        /* CONTACT WITH DEEP SHADOW */
+        .contact-wrap { 
+            display: flex; background: white; border-radius: 24px; overflow: hidden; 
+            margin-top: 40px; 
+            /* Enhanced Shadow */
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25), 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+            border: 1px solid #f1f5f9;
+        }
+        .contact-info-panel { background: var(--primary-dark); color: white; padding: 60px; flex: 1; }
+        .info-item { display: flex; gap: 20px; margin-bottom: 30px; align-items: center; }
+        .info-item i { flex-shrink: 0; width: 50px; height: 50px; background: rgba(255,255,255,0.1); display: flex; align-items: center; justify-content: center; border-radius: 50%; font-size: 20px; transition: 0.3s; }
+        .info-item:hover i { background: var(--accent); color: var(--dark-bg); }
+        
+        /* Make contact details text clickable and distinct */
+        .info-item div { overflow: hidden; }
+        .info-item p { margin: 0; word-break: break-all; opacity: 0.8; font-size: 14px; }
+        .info-item a { color: white; font-weight: 600; font-size: 16px; text-decoration: none; }
+        .info-item a:hover { text-decoration: underline; }
+
+        .form-panel { flex: 1.5; padding: 60px; }
+        .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+        .input-group { display: flex; flex-direction: column; }
+        .input-group.full { grid-column: span 2; }
+        .input-group input, .input-group textarea { padding: 15px; background: #f8fafc; border: 2px solid #e2e8f0; border-radius: 12px; font-family: inherit; font-size: 16px; width: 100%; transition:0.3s; }
+        .input-group input:focus, .input-group textarea:focus { outline:none; border-color: var(--primary); background:white; }
+
+        footer { background: #0b1120; color: #94a3b8; padding: 80px 0 0px; font-size: 0.9rem; }
+        .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 60px; margin-bottom: 60px; }
+        .footer-logo { color: white; font-size: 1.5rem; font-weight: 700; margin-bottom: 20px; display: block; }
+        .footer-links h4 { color: white; margin-bottom: 24px; font-size: 1.1rem;}
+        .footer-links ul li { margin-bottom: 12px; }
+        .footer-links a { text-decoration: none; color: inherit; transition: 0.2s; }
+        .footer-links a:hover { color: var(--primary); }
+        .social-icons { display: flex; gap: 15px; margin-top: 20px; }
+        .social-icons a { width: 40px; height: 40px; background: rgba(255,255,255,0.1); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; transition: 0.3s; }
+        .footer-bottom { border-top: 1px solid rgba(255,255,255,0.1); padding: 25px 0; text-align: center; margin-top: 40px; }
+
+        /* --- MODAL STYLES --- */
+        .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(15, 23, 42, 0.9); backdrop-filter: blur(8px); z-index: 2000; display: none; align-items: center; justify-content: center; padding: 20px; opacity: 0; transition: opacity 0.3s ease; }
+        .modal-overlay.active { display: flex; opacity: 1; }
+        .modal-content { background: white; width: 100%; max-width: 600px; border-radius: 20px; overflow: hidden; box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25); transform: translateY(20px); transition: transform 0.3s ease; animation: popIn 0.3s forwards; }
+        @keyframes popIn { to { transform: translateY(0); } }
+        .modal-header { background: #f8fafc; padding: 20px 30px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #e2e8f0; }
+        .modal-header h3 { font-size: 1.25rem; font-weight: 700; color: var(--dark-bg); margin: 0; }
+        .close-modal { font-size: 28px; cursor: pointer; color: #64748b; line-height: 1; }
+        .modal-body { padding: 30px; }
+        .modal-img { width: 100%; height: 200px; object-fit: cover; border-radius: 12px; margin-bottom: 25px; }
+        .specs-grid { display: grid; grid-template-columns: 1fr; gap: 20px; }
+        .spec-item { display: flex; gap: 15px; align-items: flex-start; }
+        .spec-item i { width: 40px; height: 40px; background: #eff6ff; color: var(--primary); border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 18px; flex-shrink: 0; }
+        .spec-item h4 { font-size: 14px; font-weight: 700; margin-bottom: 2px; }
+        .spec-item p { font-size: 13px; color: #64748b; margin: 0; line-height: 1.4; }
+        @media (min-width: 600px) { .specs-grid { grid-template-columns: 1fr 1fr; } }
+
+        /* =========================================
+           8. RESPONSIVE MEDIA QUERIES
+           ========================================= */
+        @media (max-width: 1024px) {
+            .top-bar { display: none; }
+            .header-btn { display: none; }
+            .hamburger { display: block; }
+            .close-menu { display: block; }
+            .mobile-only { display: inline-flex; }
+
+            .nav-center {
+                position: fixed; top: 0; left: 0; width: 100%; height: 100vh;
+                background: var(--dark-bg); flex-direction: column; justify-content: center; align-items: center;
+                padding: 40px; transform: translateX(100%); transition: transform 0.4s cubic-bezier(0.77, 0, 0.175, 1);
+                z-index: 1004; margin: 0;
+            }
+            .nav-center.active { transform: translateX(0); }
+            .nav-center a { color: white; font-size: 24px; font-weight: 600; padding: 15px 0; border-bottom: 1px solid rgba(255,255,255,0.1); width: 80%; text-align: center; }
+            .nav-center a:last-child { border: none; }
+            .brand.active { color: #ffffff !important; }
+            
+
+            .fleet-wrapper { grid-template-columns: 1fr; text-align: center; }
+            .fleet-info { display: flex; flex-direction: column; align-items: center; }
+            .fleet-info p { margin-bottom: 30px; } /* Less margin on mobile */
+            .stats-row { justify-content: center; gap: 30px; }
+            .contact-wrap { flex-direction: column; }
+            .contact-info-panel, .form-panel { padding: 40px; }
+        }
+
+        @media (max-width: 768px) {
+            .hero { text-align: center; background-position: 65% center; align-items: center;}
+            .hero-container { flex-direction: column; justify-content: center; padding-top: 80px; }
+            .hero-text { margin: 0 auto; display: flex; flex-direction: column; align-items: center; }
+            .floating-card { position: relative; margin-top: 40px; right: auto; bottom: auto; background: rgba(255,255,255,0.15); width: 100%; justify-content: center; }
+            
+            .track-input-group { flex-direction: column; padding: 20px; border-radius: 20px; }
+            .track-input-group input { margin-bottom: 15px; text-align: center; border-bottom: 1px solid rgba(255,255,255,0.1); }
+            .track-input-group button { width: 100%; }
+            .track-body { flex-direction: column; }
+            
+            .grid-3 { grid-template-columns: 1fr; }
+            .stats-row { flex-wrap: wrap; }
+            .stat { flex: 1 1 40%; }
+            .form-grid { grid-template-columns: 1fr; }
+            .input-group.full { grid-column: span 1; }
+            
+            .footer-grid { grid-template-columns: 1fr; gap: 40px; }
+            .footer-brand { text-align: left; }
+            .social-icons { justify-content: flex-start; }
+            .info-item a {
+        font-size: 13px;  /* Makes the email/phone smaller */
+        word-break: break-all; /* Ensures it wraps if still too long */
+    }
+    
+    .info-item p {
+        font-size: 12px; /* Makes the label "Email Us" smaller */
+    }
+    .btn {
+        padding: 10px 20px; /* Reduced from 14px 32px */
+        font-size: 14px;    /* Reduced from 15px */
+        height: auto;       /* Ensures they don't get stuck at a fixed height */
+        width: auto;        /* Keeps them from stretching full width (optional) */
+    }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="container nav-wrapper">
+            <a href="#" class="brand">
+                <i class="fa-solid fa-truck-fast"></i>
+                XLI <span>Logistic</span>
+            </a>
+            
+            <div class="hamburger" onclick="toggleMenu()">
+                <i class="fa-solid fa-bars"></i>
+            </div>
+            
+            <nav class="nav-center" id="mobileNav">
+                <div class="close-menu" onclick="toggleMenu()">×</div>
+                <a href="#track" onclick="toggleMenu()">Track</a>
+                <a href="#services" onclick="toggleMenu()">Services</a>
+                <a href="#fleet" onclick="toggleMenu()">Fleet</a>
+                <a href="#reviews" onclick="toggleMenu()">Reviews</a>
+                <a href="#quote" onclick="toggleMenu()" class="btn btn-primary mobile-only" style="margin-top: 30px;">Get Quote</a>
+            </nav>
+            
+            <a href="#quote" class="btn btn-primary header-btn">Get Quote <i class="fa-solid fa-arrow-right" style="margin-left:8px; font-size: 12px;"></i></a>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="hero-container">
+            <div class="hero-text">
+                <div class="hero-badge">
+                    <i class="fa-solid fa-star" style="margin-right:8px;"></i> Voted #1 Carrier 2024
+                </div>
+                <h1>Logistics at the <br>Speed of Business.</h1>
+                <p>We don't just move cargo; we accelerate your growth. Experience AI-driven tracking, a 100% green fleet, and guaranteed on-time delivery across North America.</p>
+                <div style="display: flex; gap: 15px; flex-wrap: wrap; justify-content: center;">
+                    <a href="#quote" class="btn btn-primary">Start Shipping Now</a>
+                    <a href="#track" class="btn btn-outline-white">Track Your Cargo</a>
+                </div>
+            </div>
+
+            <div class="floating-card">
+                <div style="background:white; border-radius:50%; width:40px; height:40px; display:flex; align-items:center; justify-content:center; color:var(--primary);">
+                    <i class="fa-solid fa-chart-line"></i>
+                </div>
+                <div>
+                    <h4 style="font-size:14px; font-weight:700; margin:0;">Live Fleet Status</h4>
+                    <span style="font-size:12px; color: #4ade80;">98% On Time • Active</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="track" class="tracking-section">
+        <div class="tracking-bg"></div>
+        <div class="container tracking-container">
+            <h2>Track Your Cargo</h2>
+            <p>Enter your Load ID or BOL Number to see the exact location.</p>
+            
+            <div class="track-input-group">
+                <input type="text" id="trackInput" placeholder="Enter Tracking ID (e.g. 88421)">
+                <button type="button" onclick="simulateTracking()"><i class="fa-solid fa-location-crosshairs"></i> Track Location</button>
+            </div>
+
+            <div id="tracking-result" class="tracking-result">
+                <div class="track-header">
+                    <span style="font-weight:600;">Order #88421</span>
+                    <span class="track-status"><span class="status-dot"></span> In Transit</span>
+                </div>
+                <div class="track-body">
+                    <div class="track-map-mock"></div>
+                    <div class="track-details">
+                        <h4>Current Location: Surrey, BC</h4>
+                        <p>Vehicle is moving on HWY 1 Eastbound.</p>
+                        <div class="track-meta">
+                            <span><i class="fa-regular fa-clock"></i> ETA: 2 Hours</span>
+                            <span><i class="fa-solid fa-truck"></i> Unit: XL-402</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <section id="services" class="section-padding" style="background: var(--light-bg);">
+        <div class="container">
+            <div class="services-header">
+                <h2>Premium Services</h2>
+                <p style="color:var(--text-light);">Tailored solutions for complex supply chains</p>
+            </div>
+            
+            <div class="grid-3">
+                <div class="card"><div class="icon-box"><i class="fa-solid fa-box-open"></i></div><h3>FTL & LTL Freight</h3><p>Optimized network ensures cost-effective delivery for full or partial loads.</p></div>
+                <div class="card"><div class="icon-box"><i class="fa-solid fa-bolt"></i></div><h3>Expedited Shipping</h3><p>Time-critical loads get priority routing and dual-driver teams.</p></div>
+                <div class="card"><div class="icon-box"><i class="fa-solid fa-earth-americas"></i></div><h3>Cross-Border</h3><p>Seamless customs clearance for shipments between Canada and the USA.</p></div>
+                <div class="card"><div class="icon-box"><i class="fa-solid fa-warehouse"></i></div><h3>Warehousing</h3><p>Secure, climate-controlled storage with real-time inventory systems.</p></div>
+                <div class="card"><div class="icon-box"><i class="fa-solid fa-temperature-arrow-down"></i></div><h3>Refrigerated</h3><p>State-of-the-art reefers ensuring perishable goods stay fresh.</p></div>
+                <div class="card"><div class="icon-box"><i class="fa-solid fa-clipboard-check"></i></div><h3>Consulting</h3><p>Expert analysis to optimize logistics, reduce costs, and improve speed.</p></div>
+            </div>
+        </div>
+    </section>
+
+    <section id="fleet" class="section-padding modern-fleet">
+        <div class="container fleet-wrapper">
+            <div class="fleet-info">
+                <h4>Infrastructure</h4>
+                <h2>A Fleet Built for <br><span style="color: var(--accent);">The Future.</span></h2>
+                <p>We don't just drive trucks; we operate mobile data centers. Our 2025 fleet utilizes aerodynamic designs and low-emission engines to reduce carbon footprint while maximizing reliability.</p>
+                
+                <div class="stats-row">
+                    <div class="stat"><h3>100%</h3><p>Asset Based</p></div>
+                    <div class="stat"><h3>24/7</h3><p>Command Center</p></div>
+                    <div class="stat"><h3>100%</h3><p>GPS Visibility</p></div>
+                </div>
+                
+                <button class="btn btn-glow" onclick="openFleetModal()">View Fleet Specs</button>
+            </div>
+            <div class="fleet-visual">
+                <img src="https://images.unsplash.com/photo-1601584115197-04ecc0da31d7?auto=format&fit=crop&q=80&w=1500" alt="Futuristic Truck" class="fleet-img">
+            </div>
+        </div>
+    </section>
+
+    <section id="reviews" class="section-padding reviews-section">
+        <div class="container">
+            <div class="services-header">
+                <h2>Client Feedback</h2>
+                <p style="color:var(--text-light);">Trusted by businesses across the continent</p>
+            </div>
+            <div class="grid-3">
+                <div class="review-card">
+                    <div class="reviewer-info">
+                        <div class="reviewer-img">JD</div>
+                        <div class="reviewer-details"><h4>John Davis</h4><span><i class="fa-solid fa-circle-check"></i> Verified Client</span></div>
+                    </div>
+                    <div class="stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+                    <p class="review-text">"XLI Logistic has transformed our supply chain. Their on-time performance is unmatched and the tracking is flawless."</p>
+                </div>
+                <div class="review-card">
+                    <div class="reviewer-info">
+                        <div class="reviewer-img">SM</div>
+                        <div class="reviewer-details"><h4>Sarah Miller</h4><span><i class="fa-solid fa-circle-check"></i> Verified Client</span></div>
+                    </div>
+                    <div class="stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+                    <p class="review-text">"We rely on XLI for our refrigerated shipments. Always arrive at the perfect temperature without any issues."</p>
+                </div>
+                <div class="review-card">
+                    <div class="reviewer-info">
+                        <div class="reviewer-img">RW</div>
+                        <div class="reviewer-details"><h4>Robert Wilson</h4><span><i class="fa-solid fa-circle-check"></i> Verified Client</span></div>
+                    </div>
+                    <div class="stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+                    <p class="review-text">"The cross-border service is seamless. They handle all the customs paperwork efficiently. Highly recommended."</p>
+                </div>
+                <div class="review-card">
+                    <div class="reviewer-info">
+                        <div class="reviewer-img">JD</div>
+                        <div class="reviewer-details"><h4>John Davis</h4><span><i class="fa-solid fa-circle-check"></i> Verified Client</span></div>
+                    </div>
+                    <div class="stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+                    <p class="review-text">"XLI Logistic has transformed our supply chain. Their on-time performance is unmatched and the tracking is flawless."</p>
+                </div>
+                <div class="review-card">
+                    <div class="reviewer-info">
+                        <div class="reviewer-img">SM</div>
+                        <div class="reviewer-details"><h4>Sarah Miller</h4><span><i class="fa-solid fa-circle-check"></i> Verified Client</span></div>
+                    </div>
+                    <div class="stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+                    <p class="review-text">"We rely on XLI for our refrigerated shipments. Always arrive at the perfect temperature without any issues."</p>
+                </div>
+                <div class="review-card">
+                    <div class="reviewer-info">
+                        <div class="reviewer-img">RW</div>
+                        <div class="reviewer-details"><h4>Robert Wilson</h4><span><i class="fa-solid fa-circle-check"></i> Verified Client</span></div>
+                    </div>
+                    <div class="stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+                    <p class="review-text">"The cross-border service is seamless. They handle all the customs paperwork efficiently. Highly recommended."</p>
+                </div>
+            </div>
+            <a href="https://www.google.com/maps" target="_blank" class="google-btn">
+                <i class="fa-brands fa-google" style="margin-right: 8px; color: #4285F4;"></i>
+                Read all reviews
+            </a>
+        </div>
+    </section>
+
+    <section id="quote" class="section-padding">
+        <div class="container">
+            <div class="services-header">
+                <h2>Request a Quote</h2>
+                <p style="color:var(--text-light);">Get a competitive rate within 60 minutes</p>
+            </div>
+            <div class="contact-wrap">
+                <div class="contact-info-panel">
+                    <div>
+                        <h3 style="font-size: 24px; margin-bottom: 30px;">Contact Info</h3>
+                        <div class="info-item">
+                            <i class="fa-solid fa-phone"></i>
+                            <div>
+                                <p>Call Us</p>
+                                <a href="tel:+16045550123">+1 (604) 555-0123</a>
+                            </div>
+                        </div>
+                        <div class="info-item">
+                            <i class="fa-solid fa-envelope"></i>
+                            <div>
+                                <p>Email Us</p>
+                                <a href="mailto:dispatch@xlilogistic.com">dispatch@xlilogistic.com</a>
+                            </div>
+                        </div>
+                        <div class="info-item">
+                            <i class="fa-solid fa-map-pin"></i>
+                            <div>
+                                <p>Visit HQ</p>
+                                <a href="https://www.google.com/maps/search/?api=1&query=Surrey,+BC,+Canada" target="_blank">Surrey, BC, Canada</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-panel">
+                    <form class="form-grid">
+                        <div class="input-group"><label>Full Name</label><input type="text" placeholder="John Doe"></div>
+                        <div class="input-group"><label>Company Name</label><input type="text" placeholder="Business Ltd."></div>
+                        <div class="input-group"><label>Origin</label><input type="text" placeholder="City/Zip"></div>
+                        <div class="input-group"><label>Destination</label><input type="text" placeholder="City/Zip"></div>
+                        <div class="input-group full"><label>Details</label><textarea rows="4" placeholder="Dimensions..."></textarea></div>
+                        <div class="input-group full"><button type="submit" class="btn btn-primary" style="width: 100%;">Get Your Quote</button></div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container footer-grid">
+            <div class="footer-brand">
+                <a href="#" class="footer-logo"><i class="fa-solid fa-truck-fast"></i> XLI Logistic</a>
+                <p>Redefining logistics through technology and dedication. Your cargo, our commitment.</p>
+                <div class="social-icons">
+                    <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
+                    <a href="#"><i class="fa-brands fa-twitter"></i></a>
+                    <a href="#"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="#"><i class="fa-brands fa-linkedin-in"></i></a>
+                </div>
+            </div>
+            
+            <div class="footer-links">
+                <h4>Company</h4>
+                <ul>
+                    <li><a href="#">About Us</a></li>
+                    <li><a href="#">Team</a></li>
+                    <li><a href="#">Careers</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-links">
+                <h4>Services</h4>
+                <ul>
+                    <li><a href="#">Freight</a></li>
+                    <li><a href="#">Warehousing</a></li>
+                    <li><a href="#">Consulting</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-links">
+                <h4>Support</h4>
+                <ul>
+                    <li><a href="#">Help Center</a></li>
+                    <li><a href="#">Privacy</a></li>
+                    <li><a href="tel:+16045550123">Contact</a></li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="container footer-bottom">
+            <p>© 2025 XLI Logistic Ltd. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <div id="fleetModal" class="modal-overlay">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Fleet Specifications</h3>
+                <span class="close-modal" onclick="closeFleetModal()">×</span>
+            </div>
+            <div class="modal-body">
+                <img src="https://images.unsplash.com/photo-1601584115197-04ecc0da31d7?auto=format&fit=crop&q=80&w=800" alt="Truck Spec" class="modal-img">
+                <div class="specs-grid">
+                    <div class="spec-item"><i class="fa-solid fa-calendar-check"></i><div><h4>Year / Make</h4><p>2024-2025 Freightliner Cascadia & Volvo VNL</p></div></div>
+                    <div class="spec-item"><i class="fa-solid fa-snowflake"></i><div><h4>Capabilities</h4><p>Reefer (Temp Control) & Dry Van 53'</p></div></div>
+                    <div class="spec-item"><i class="fa-solid fa-satellite-dish"></i><div><h4>Technology</h4><p>Samsara GPS & Dashcams</p></div></div>
+                    <div class="spec-item"><i class="fa-solid fa-leaf"></i><div><h4>Emissions</h4><p>EPA SmartWay Certified</p></div></div>
+                </div>
+                <a href="#quote" class="btn btn-primary" style="width:100%; margin-top:20px;" onclick="closeFleetModal()">Book This Equipment</a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function toggleMenu() {
+            var nav = document.getElementById('mobileNav');
+            var brand = document.querySelector('.brand');
+            nav.classList.toggle('active');
+            brand.classList.toggle('active');
+        }
+
+        function simulateTracking() {
+            var input = document.getElementById('trackInput').value;
+            var result = document.getElementById('tracking-result');
+            if(input.length > 0) { result.style.display = 'block'; } else { alert("Please enter a Tracking ID"); }
+        }
+
+        /* --- MODAL LOGIC --- */
+        function openFleetModal() {
+            const modal = document.getElementById('fleetModal');
+            modal.style.display = 'flex';
+            setTimeout(() => { modal.classList.add('active'); }, 10);
+            document.body.style.overflow = 'hidden'; 
+        }
+
+        function closeFleetModal() {
+            const modal = document.getElementById('fleetModal');
+            modal.classList.remove('active');
+            setTimeout(() => { modal.style.display = 'none'; }, 300); 
+            document.body.style.overflow = 'auto'; 
+        }
+
+        window.onclick = function(event) {
+            const modal = document.getElementById('fleetModal');
+            if (event.target == modal) { closeFleetModal(); }
+        }
+    </script>
+
+</body>
+</html>
